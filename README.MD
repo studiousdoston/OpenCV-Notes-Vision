@@ -37,3 +37,22 @@ its color. A gamma curve then darkens faint ink without greying the paper.
 but for documents it also boosts paper texture and grid lines. Background
 division only removes lighting differences, so grid lines stay light and colors
 are preserved, which the planned highlighter-detection feature needs.
+
+## Step 6: Resize + compress for the AI model
+
+Pages are resized to fit Claude's standard-tier vision limits
+(1568px long edge **and** 1568 visual tokens, where tokens = ⌈w/28⌉ × ⌈h/28⌉),
+then encoded as JPEG quality 85.
+
+![Token and file size savings](docs/showcase/step6_savings.png)
+
+| Metric (8 sample pages) | Before   | After    | Saved   |
+| ----------------------- | -------- | -------- | ------- |
+| Visual tokens\*         | 25,088   | 10,621   | **58%** |
+| File size               | 5,015 KB | 2,428 KB | **52%** |
+
+\*"Before" = tokens a high-resolution model would charge for the full-size image.
+
+**Lesson learned:** my first version only limited the long edge, which still
+produced ~2,300-token pages. Claude's standard tier caps tokens too, so the
+resize now shrinks until both limits fit.
