@@ -2,7 +2,7 @@
 
 Preprocessing pipeline that turns phone photos of handwritten notes into clean,
 flat page images, before they are sent to an AI model to generate flashcards
-for [Brainmaxx](link-to-brainmaxx-repo).
+for [Brainmaxx](https://github.com/studiousdoston/Personal_Study_App-).
 
 ## Step 4: Page detection + perspective flattening
 
